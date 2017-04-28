@@ -5,8 +5,8 @@
  */
 package eu.redmoon.monitor.home.temp;
 
+import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,19 +29,39 @@ public class AjaxServletTemp extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AjaxServletTemp</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AjaxServletTemp at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+        request.setCharacterEncoding("UTF-8");
+        String accion = request.getParameter("accion");
+        
+        
+        Gson gson = new Gson();
+        
+        switch (accion) {
+            case "WriteTemp":
+                {
+                   String ds1820ID = request.getParameter("uid");
+                   String Temperature = request.getParameter("temp");
+                   // SQLCustomers myCustomers = new SQLCustomers(xDataBase);
+                   // List<TuplasCustomers> ListaCustomer = myCustomers.getTuplasCustomers(Integer.parseInt(pagina),Integer.parseInt(size));
+                   // response.getWriter().write(gson.toJson(ListaCustomer));
+                    break;
+                }
+            case "NewDevice":
+                {
+                   String ds1820ID = request.getParameter("uid");
+                   String Locate = request.getParameter("lugar");
+                   String Tipo = request.getParameter("modelo");
+                   // SQLCustomers myCustomers = new SQLCustomers(xDataBase);
+                   // List<TuplasCustomers> ListaCustomer = myCustomers.getTuplasCustomers(Integer.parseInt(pagina),Integer.parseInt(size));
+                   // response.getWriter().write(gson.toJson(ListaCustomer));
+                    break;
+                }    
+            default:
+                response.getWriter().write("Error, mensaje no conteplado: "+accion);
+                break;
         }
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,7 +100,7 @@ public class AjaxServletTemp extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Gestion de las temperaturas de un conjunto de lugares";
     }// </editor-fold>
 
 }
