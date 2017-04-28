@@ -13,6 +13,8 @@ ALTER USER dilar_monitor WITH SUPERUSER;
 
 */
 
+-- 28EE41012F1602BE
+
 CREATE TABLE Devices
 (
     device_uid          varchar(90) NOT NULL,
@@ -25,7 +27,7 @@ CREATE TABLE Devices
 
 
 
-CREATE TABLE measurements
+CREATE TABLE Measurements
 (
     id                  serial NOT NULL,
     uid                 varchar(90) references Devices(device_uid),

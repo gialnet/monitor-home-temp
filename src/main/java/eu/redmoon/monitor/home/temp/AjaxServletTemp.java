@@ -33,7 +33,7 @@ public class AjaxServletTemp extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String accion = request.getParameter("accion");
         
-        
+       
         Gson gson = new Gson();
         
         switch (accion) {
